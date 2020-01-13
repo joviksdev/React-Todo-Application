@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Form from './component/layout/Form';
+import Header from './component/layout/Header';
+import Footer from './component/layout/Footer';
+import Todo from './component/todo/Todo';
+import About from './component/pages/About';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <div className='app-wrapper'>
+          <Header />
+          <main>
+            <Route
+              exact
+              path='/'
+              render={props => (
+                <Fragment>
+                  <Form />
+                  <Todo />
+                </Fragment>
+              )}
+            />
+            <Route exact path='/about' component={About} />
+          </main>
+          <Footer />
+        </div>
+      </Switch>
+    </Router>
   );
-}
+};
 
 export default App;
